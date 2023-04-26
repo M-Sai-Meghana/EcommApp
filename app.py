@@ -240,7 +240,7 @@ def login():
 def dashboard():
     if session.get('user'):
         return render_template('dashboard.html')
-    cursor=mydb.cursor()
+    cursor=mydb.cursor(buffered=True)
     cursor.execute("select * from items")
     items=cursor.fetchall()
     return render_template('dashboard.html',items=items)

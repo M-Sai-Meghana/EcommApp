@@ -75,7 +75,7 @@ def adminlogin():
         count = cursor.fetchone()[0]
         if count == 0:
             flash('Invalid email or password')
-            return render_template('login.html')
+            return render_template('adminlogin.html')
         else:
             session['user'] = email
             return render_template('admindash.html')

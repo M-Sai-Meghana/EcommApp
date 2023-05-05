@@ -27,7 +27,7 @@ with mysql.connector.connect(host=host, user=user, password=password, db=db) as 
     cursor.execute("create table if not exists orders(ord_id int primary key auto_increment,itemid varchar(8),name char(30),qty int,total_price int,mobile varchar(10),foreign key(itemid) references items(item_id) on update cascade on delete cascade,foreign key(mobile) references users(mobile_number) on update cascade on delete cascade)")
     cursor.execute("create table if not exists reviews(mobile varchar(30),itemid varchar(30),title tinytext,review text,rating int,foreign key(mobile) references users(mobile_number) on update cascade on delete cascade,foreign key(itemid) references items(item_id) on update cascade on delete cascade,primary key(mobile,itemid),date datetime default now())")
     cursor.execute("create table if not exists admin(username char(30),email varchar(70),password varchar(16),passcode int)")
-    cursor.execute("create table if not exists contactus(name varchar(30),emailid varchar(40),message tinytext)")
+    cursor.execute("create table if not exists contactus(name varchar(30),email varchar(40),message tinytext)")
 Session(app)
 @app.route('/')
 def home():
@@ -410,7 +410,7 @@ def contactus():
         emailid=request.form['emailid']
         message=request.form['message']
         cursor=mydb.cursor(buffered=True)
-        cursor.execute('insert into contactus(name,emailid,message) values(%s,%s,%s)',[name,emailid,message])
+        cursor.execute('insert into contactus(name,email,message) values(%s,%s,%s)',[name,emailid,message])
         mydb.commit()
     return render_template('contactus.html')
     

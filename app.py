@@ -401,7 +401,7 @@ def search():
         cursor = mydb.cursor(buffered=True)
         cursor.execute('SELECT * from items where item_name=%s',[name])
         data= cursor.fetchall()
-        return render_template('dashboard.html',items=data)
+        return render_template('dashboard.html',data=data)
 @app.route('/contactus',methods=['GET','POST'])
 def contactus():
     if request.method=="POST":
